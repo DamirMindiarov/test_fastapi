@@ -4,6 +4,10 @@ from routes import app
 client = TestClient(app)
 
 
+def test_simple():
+    assert True
+
+
 def test_read_recipes():
     response = client.get("/recipes")
     assert response.status_code == 200

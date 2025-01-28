@@ -1,0 +1,48 @@
+name: FastApi CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: create venv
+        run:
+          python -m venv venv
+          source venv/bin/activate
+
+      - name: install dependencies
+        run:
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: run api
+        run: uvicorn routes:app
+
+      - name: run tests.py
+        run: pytest test.py -vv
+
+
+
+
+
+
+
+
+
+
+
+
+

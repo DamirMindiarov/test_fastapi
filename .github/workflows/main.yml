@@ -25,8 +25,8 @@ jobs:
 
       - name: install dependencies
         run:
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: run api
         run: uvicorn routes:app

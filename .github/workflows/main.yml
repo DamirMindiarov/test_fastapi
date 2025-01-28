@@ -18,10 +18,10 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: create venv
-        run:
-          python -m venv venv
-          source venv/bin/activate
+#      - name: create venv
+#        run:
+#          python -m venv venv
+#          source venv/bin/activate
 
       - name: install dependencies
         run:

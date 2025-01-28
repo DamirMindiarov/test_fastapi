@@ -3,7 +3,7 @@ name: FastApi CI
 on:
   push:
     branches:
-      - *
+      - '*'
 
 jobs:
   build:

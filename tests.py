@@ -4,8 +4,8 @@ from routes import app
 client = TestClient(app)
 
 
-def test_simple():
-    assert True
+# def test_simple():
+#     assert True
 
 
 def test_read_recipes():

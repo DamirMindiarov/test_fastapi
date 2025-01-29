@@ -1,25 +1,30 @@
+import asyncio
+
+import pytest
 from fastapi.testclient import TestClient
 
-from routes import app
-
-client = TestClient(app)
-
-
-# def test_simple():
-#     assert True
+from app.database import engine
+from app.models_db import Base
+from app.routes import app
 
 
-def test_read_recipes():
+@pytest.fixture
+def client():
+    with TestClient(app) as client:
+        yield client
+
+
+def test_read_recipes(client):
     response = client.get("/recipes")
     assert response.status_code == 200
 
 
-def test_read_recipes_id():
+def test_read_recipes_id(client):
     response = client.get("/recipes/1")
     assert response.status_code == 200
 
 
-def test_read_recipes_bad_id_validation_error():
+def test_read_recipes_bad_id_validation_error(client):
     response = client.get("/recipes/id")
     assert response.status_code == 422
     assert response.json() == {
@@ -34,7 +39,7 @@ def test_read_recipes_bad_id_validation_error():
     }
 
 
-def test_create_item():
+def test_create_item(client):
     body = {
         "name": "recipe name",
         "cooking_time": 150,
@@ -52,7 +57,7 @@ def test_create_item():
     )
 
 
-def test_create_item_validation_error():
+def test_create_item_validation_error(client):
     body = {
         "name": 11111,
         "cooking_time": 150,

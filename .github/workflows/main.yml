@@ -32,8 +32,8 @@ jobs:
       # - name: run api
       #   run: uvicorn routes:app
 
-      - name: run tests.py
-        run: pytest tests.py -vv
+      - name: run test_app.py
+        run: pytest
 
       - name: black
         run: black --check --diff .

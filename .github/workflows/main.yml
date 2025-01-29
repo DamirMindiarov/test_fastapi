@@ -38,6 +38,11 @@ jobs:
       - name: black
         run: black --check --diff .
 
+      - name: isort
+        run: isort --profile black .
+
+
+
 
 
 

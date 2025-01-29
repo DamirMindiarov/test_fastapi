@@ -2,11 +2,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from sqlalchemy import select, update
-from sqlalchemy.exc import InvalidRequestError
 
-from database import engine, session
-from models_db import Base, RecipeDB, RecipesInfoDB
-from models_routes import RecipeIn, RecipeInfoPydentic, RecipeOut
+from app.database import engine, session
+from app.models_db import Base, RecipeDB, RecipesInfoDB
+from app.models_routes import RecipeIn, RecipeInfoPydentic, RecipeOut
 
 
 async def create_db():
@@ -44,8 +43,8 @@ async def recipes_all() -> list[RecipeInfoPydentic]:
             )
         )
         all_recipes = result.scalars().all()
-        response = [RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes]
-        return response
+        # response = [RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes]
+        return [RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes]
 
 
 @app.get("/recipes/{recipe_id}")

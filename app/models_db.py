@@ -2,7 +2,8 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-class Base(DeclarativeBase): ...
+class Base(DeclarativeBase):
+    pass
 
 
 class RecipeDB(Base):
@@ -24,7 +25,9 @@ class RecipesInfoDB(Base):
     count_views: Mapped[int]
     cooking_time: Mapped[int]
 
-    recipe: Mapped["RecipeDB"] = relationship("RecipeDB", backref="info", uselist=False)
+    recipe: Mapped["RecipeDB"] = relationship(
+        "RecipeDB", backref="info", uselist=False
+    )
 
     def __repr__(self):
         return f"{self.name} {self.count_views}"

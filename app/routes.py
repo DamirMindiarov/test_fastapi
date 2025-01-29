@@ -39,18 +39,22 @@ async def recipes_all() -> list[RecipeInfoPydentic]:
     async with session.begin():
         result = await session.execute(
             select(RecipesInfoDB).order_by(
-                RecipesInfoDB.count_views.desc(), RecipesInfoDB.cooking_time.desc()
+                RecipesInfoDB.count_views.desc(),
+                RecipesInfoDB.cooking_time.desc(),
             )
         )
         all_recipes = result.scalars().all()
-        # response = [RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes]
-        return [RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes]
+        return [
+            RecipeInfoPydentic(**recipe.__dict__) for recipe in all_recipes
+        ]
 
 
 @app.get("/recipes/{recipe_id}")
 async def recipe_by_id(recipe_id: int) -> RecipeOut | None:
     """получить рецепт вернуть его, увеличить счетчик на 1"""
-    result = await session.execute(select(RecipeDB).where(RecipeDB.id == recipe_id))
+    result = await session.execute(
+        select(RecipeDB).where(RecipeDB.id == recipe_id)
+    )
     recipe = result.scalar()
 
     if recipe:
@@ -66,7 +70,9 @@ async def recipe_add(recipe: RecipeIn) -> RecipeOut:
     new_recipe = RecipeDB(**recipe.model_dump())
 
     recipe_info = RecipesInfoDB(
-        name=new_recipe.name, count_views=0, cooking_time=new_recipe.cooking_time
+        name=new_recipe.name,
+        count_views=0,
+        cooking_time=new_recipe.cooking_time,
     )
 
     await session.commit()

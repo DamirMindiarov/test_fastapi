@@ -21,25 +21,23 @@ jobs:
         with:
           python-version: 3.12
 
-#      - name: create venv
-#        run:
-#          python -m venv venv
-#          source venv/bin/activate
-
       - name: install dependencies
         run: pip install -r requirements.txt
-
-      # - name: run api
-      #   run: uvicorn routes:app
 
       - name: run test_app.py
         run: pytest
 
       - name: black
-        run: black --check --diff .
+        run: black --check --diff --line-length 79 .
 
       - name: isort
-        run: isort --profile black .
+        run: isort --check-only --diff --profile black .
+
+      - name: flake8
+        run: |
+          flake8 app
+          flake8 tests
+
 
 
 

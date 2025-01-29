@@ -1,10 +1,6 @@
-import asyncio
-
 import pytest
 from fastapi.testclient import TestClient
 
-from app.database import engine
-from app.models_db import Base
 from app.routes import app
 
 
@@ -32,7 +28,8 @@ def test_read_recipes_bad_id_validation_error(client):
             {
                 "type": "int_parsing",
                 "loc": ["path", "recipe_id"],
-                "msg": "Input should be a valid integer, unable to parse string as an integer",
+                "msg": "Input should be a valid integer, "
+                "unable to parse string as an integer",
                 "input": "id",
             }
         ]
@@ -47,14 +44,11 @@ def test_create_item(client):
         "description": "description, description, description",
     }
     response = client.post("/recipes", json=body)
+    body.update(id=response.json()["id"])
+
     assert response.status_code == 201
-    assert (
-        response.json()["name"] == "recipe name"
-        and response.json()["cooking_time"] == 150
-        and response.json()["ingredients"] == "apple orange"
-        and response.json()["description"] == "description, description, description"
-        and type(response.json()["id"]) == int
-    )
+    assert response.json() == body
+    assert response.json()["id"]
 
 
 def test_create_item_validation_error(client):

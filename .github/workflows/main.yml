@@ -33,7 +33,7 @@ jobs:
       #   run: uvicorn routes:app
 
       - name: run test_app.py
-        run: pytest test_app.py -vv
+        run: pytest
 
       - name: black
         run: black --check --diff .

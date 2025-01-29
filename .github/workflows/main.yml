@@ -28,7 +28,7 @@ jobs:
         run: pytest
 
       - name: black
-        run: black --check --diff --line-length 79.
+        run: black --check --diff --line-length 79 .
 
       - name: isort
         run: isort --check-only --diff --profile black .

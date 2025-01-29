@@ -1,11 +1,12 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from models_db import Base, RecipeDB, RecipesInfoDB
-from database import engine, session
-from models_routes import RecipeOut, RecipeInfoPydentic, RecipeIn
 from sqlalchemy import select, update
 from sqlalchemy.exc import InvalidRequestError
+
+from database import engine, session
+from models_db import Base, RecipeDB, RecipesInfoDB
+from models_routes import RecipeIn, RecipeInfoPydentic, RecipeOut
 
 
 async def create_db():

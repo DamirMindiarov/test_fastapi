@@ -59,9 +59,9 @@ async def recipe_by_id(recipe_id: int) -> RecipeOut | None:
 
     if recipe:
         await inc_counter(recipe_id)
-        recipe = RecipeOut(**recipe.__dict__)
+        return RecipeOut(**recipe.__dict__)
 
-    return recipe
+    return None
 
 
 @app.post("/recipes", status_code=201)
@@ -77,7 +77,7 @@ async def recipe_add(recipe: RecipeIn) -> RecipeOut:
 
     await session.commit()
     async with session.begin():
-        new_recipe.info.append(recipe_info)
+        new_recipe.info = recipe_info
         session.add(new_recipe)
 
     return RecipeOut(**new_recipe.__dict__)

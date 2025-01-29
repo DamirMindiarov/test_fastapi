@@ -38,6 +38,11 @@ jobs:
           flake8 app
           flake8 tests
 
+      - name: mypy
+        run: |
+          mypy app
+          mypy tests
+
 
 
 

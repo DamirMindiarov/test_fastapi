@@ -14,6 +14,10 @@ class RecipeDB(Base):
     ingredients: Mapped[str]
     description: Mapped[str]
 
+    info: Mapped["RecipesInfoDB"] = relationship(
+        "RecipesInfoDB", back_populates="recipe"
+    )
+
     def __repr__(self):
         return f"{self.id=} {self.name=}"
 
@@ -26,7 +30,7 @@ class RecipesInfoDB(Base):
     cooking_time: Mapped[int]
 
     recipe: Mapped["RecipeDB"] = relationship(
-        "RecipeDB", backref="info", uselist=False
+        "RecipeDB", back_populates="info", uselist=False
     )
 
     def __repr__(self):

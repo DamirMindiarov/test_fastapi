@@ -35,6 +35,9 @@ jobs:
       - name: run tests.py
         run: pytest tests.py -vv
 
+      - name: black
+        run: black --check --diff .
+
 
 
 

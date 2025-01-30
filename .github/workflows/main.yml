@@ -9,10 +9,8 @@ on:
       - '*'
 
 jobs:
-  build:
+  run_tests:
     runs-on: ubuntu-latest
-    env: 
-      LOGIN: ${{ secrets.TEST_KEY }}
 
     steps:
       - name: Checkout code
@@ -46,19 +44,22 @@ jobs:
         run: |
           mypy app
           mypy tests
+  
+  build_and_pub:
+    needs: [run_tests]
+    runs_on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      PWD: ${{ secrets.DOCKER_PWD }}
+      NAME: ${{ secrets.DOCKER_NAME }}
 
+    steps:
+      - name: login to docker
+        run: docker login -u $LOGIN -p $PWD
+        uses: actions/checkout@v2
 
+      - name: build image
+        run: docker build -t $LOGIN/$NAME:2.0.0 .
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      - name: push image to docker
+        run: docker push $LOGIN/$NAME:2.0.0

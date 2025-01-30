@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.12
+
       - name: print(login)
         run: echo ${{ secrets.TEST_KEY }}
 
@@ -71,3 +72,23 @@ jobs:
 
       - name: push image to docker
         run: docker push $LOGIN/$NAME:3.0.0
+
+  deploy:
+    needs: [build_and_pub]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: install fabric
+        run: pip install fabric==3.2.2
+
+      - name: deploy
+        run: fab deploy
+
+

@@ -64,6 +64,9 @@ jobs:
       - name: build image
         run: |
           echo ${GITHUB_REF}
+          echo ${GITHUB_REF:11}
+          echo ${GITHUB_REF:5}
+          echo ${GITHUB_REF:15}
           docker build -t $LOGIN/$NAME:3.0.0 .
 
       - name: push image to docker

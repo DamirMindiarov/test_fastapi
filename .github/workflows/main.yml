@@ -95,6 +95,7 @@ jobs:
           P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
         run: |
           echo $P_SSH_KEY
+          python fabfile.py
 #          fab deploy
 
 

@@ -92,7 +92,7 @@ jobs:
 
       - name: deploy
         env:
-          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
+          P_SSH_KEY: ${{ secrets.KEY_TIMEWEB }}
         run: |
           echo $P_SSH_KEY
           python fabfile.py

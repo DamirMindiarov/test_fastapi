@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      LOGIN: ${{ secrets.SECRET_KEY }}
+      LOGIN: ${{ secrets.TEST_KEY }}
 
     steps:
       - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: 3.12
       - name: print(login)
-        run: echo ${{ secrets.TEST_KEY }}
+        run: echo ${{ secrets.TESST_KEY }} | echo ${{ secrets.TEST_KEY }} | echo ${{ $LOGIN }}
 
       - name: install dependencies
         run: pip install -r requirements.txt

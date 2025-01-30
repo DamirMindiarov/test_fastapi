@@ -85,10 +85,10 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: install fabric
-        run: |
-          pip install fabric==3.2.2
-          pip install paramiko==3.5.0
+#      - name: install fabric
+#        run: |
+#          pip install fabric==3.2.2
+#          pip install paramiko==3.5.0
 
       - name: deploy
         env:

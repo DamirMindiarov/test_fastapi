@@ -2,7 +2,8 @@ import os
 
 from fabric import Connection, task
 
-print(os.environ["P_SSH_KEY"])
+a = os.environ["P_SSH_KEY"]
+print(a)
 
 
 @task

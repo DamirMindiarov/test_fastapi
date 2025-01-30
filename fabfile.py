@@ -4,6 +4,7 @@ from fabric import Connection, task
 
 print(os.environ["P_SSH_KEY"])
 
+
 @task
 def deploy(ctx):
     with Connection(

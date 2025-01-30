@@ -8,6 +8,8 @@ print(a)
 
 @task
 def deploy(ctx):
+    a = os.environ["P_SSH_KEY"]
+    print(a)
     with Connection(
         "85.209.9.55",
         user="user",

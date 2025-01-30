@@ -96,6 +96,6 @@ jobs:
         run: |
           echo $P_SSH_KEY
           python fabfile.py
-#          fab deploy
+          fab deploy
 
 

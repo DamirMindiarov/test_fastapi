@@ -46,8 +46,8 @@ jobs:
           mypy tests
   
   build_and_pub:
-    runs_on: [ubuntu-latest]
     needs: [run_tests]
+    runs-on: ubuntu-latest
     env:
       LOGIN: ${{ secrets.DOCKER_LOGIN }}
       PWD: ${{ secrets.DOCKER_PWD }}

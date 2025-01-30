@@ -93,6 +93,8 @@ jobs:
       - name: deploy
         env:
           P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
-        run: fab deploy
+        run: |
+          echo $P_SSH_KEY
+#          fab deploy
 
 

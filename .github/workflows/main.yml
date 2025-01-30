@@ -89,6 +89,8 @@ jobs:
         run: pip install fabric==3.2.2
 
       - name: deploy
+        env:
+          P_SSH_KEY: ${{ secrets.ENV_SECRET }}
         run: fab deploy
 
 

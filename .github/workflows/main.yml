@@ -54,9 +54,11 @@ jobs:
       NAME: ${{ secrets.DOCKER_NAME }}
 
     steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
       - name: login to docker
         run: docker login -u $LOGIN -p $PWD
-        uses: actions/checkout@v2
 
       - name: build image
         run: docker build -t $LOGIN/$NAME:2.0.0 .

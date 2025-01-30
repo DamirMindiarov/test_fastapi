@@ -53,15 +53,20 @@ jobs:
       PWD: ${{ secrets.DOCKER_PWD }}
       NAME: ${{ secrets.DOCKER_NAME }}
 
+
     steps:
       - name: checkout code
         uses: actions/checkout@v2
 
       - name: login to docker
-        run: docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+        run: |
+          echo ${{ secrets.DOCKER_PWD }} 
+          docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
 
       - name: build image
-        run: docker build -t $LOGIN/$NAME:3.0.0 .
+        run: |
+          echo ${GITHUB_REF}
+          docker build -t $LOGIN/$NAME:3.0.0 .
 
       - name: push image to docker
         run: docker push $LOGIN/$NAME:3.0.0

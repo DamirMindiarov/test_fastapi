@@ -74,7 +74,7 @@ jobs:
         run: docker push $LOGIN/$NAME:3.0.0
 
   deploy:
-    needs: [build_and_pub]
+    needs: [run_tests]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

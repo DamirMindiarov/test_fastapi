@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      LOGIN: ${{ secrets.SSSSSTEST_KEY }}
+      LOGIN: ${{ secrets.TEST_KEY }}
 
     steps:
       - name: Checkout code

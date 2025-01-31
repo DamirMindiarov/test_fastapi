@@ -86,5 +86,5 @@ async def recipe_add(recipe: RecipeIn) -> RecipeOut:
 
 @app.get("/", status_code=200)
 async def func_1():
-    return 'Hi'
+    return 'Hello'
 

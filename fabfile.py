@@ -19,6 +19,6 @@ def deploy(ctx):
         with c.cd("/home/user/test_fastapi"):#
             c.run("docker compose down")
             c.run("git pull")
-            c.run("docker compose up -d")
+            c.run("docker compose up --build -d")
 
     os.remove('key')

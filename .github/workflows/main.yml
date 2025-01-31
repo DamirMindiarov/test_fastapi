@@ -46,31 +46,31 @@ jobs:
 #          mypy app
 #          mypy tests
 
-  build_and_pub:
-#    needs: [run_tests]
-    runs-on: ubuntu-latest
-    env:
-      LOGIN: ${{ secrets.DOCKER_LOGIN }}
-      PWD: ${{ secrets.DOCKER_PWD }}
-      NAME: ${{ secrets.DOCKER_NAME }}
-
-
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v2
-
-      - name: login to docker
-        run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
-
-      - name: build image
-        run: |
-          docker build -t $LOGIN/$NAME:latest .
-
-      - name: push image to docker
-        run: docker push $LOGIN/$NAME:latest
+#  build_and_pub:
+##    needs: [run_tests]
+#    runs-on: ubuntu-latest
+#    env:
+#      LOGIN: ${{ secrets.DOCKER_LOGIN }}
+#      PWD: ${{ secrets.DOCKER_PWD }}
+#      NAME: ${{ secrets.DOCKER_NAME }}
+#
+#
+#    steps:
+#      - name: checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: login to docker
+#        run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
+#
+#      - name: build image
+#        run: |
+#          docker build -t $LOGIN/$NAME:latest .
+#
+#      - name: push image to docker
+#        run: docker push $LOGIN/$NAME:latest
 
   deploy:
-    needs: [build_and_pub]
+#    needs: [build_and_pub]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

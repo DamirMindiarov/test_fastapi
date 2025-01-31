@@ -17,7 +17,9 @@ def deploy(ctx):
             user="user",
             connect_kwargs={"key_filename": 'key'},
     ) as c:
-        with c.cd("/home/user"):#
+        with c.cd("/home/user/test_fastapi"):#
+            c.run("docker compose down")
+            c.run("git pull")
             c.run("docker compose up")
             # c.run("docker pull damirmin/test_fastapi:latest")
             # c.run('docker stop $(docker ps -f name=test_fastapi -qa)')

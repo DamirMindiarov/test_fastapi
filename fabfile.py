@@ -14,7 +14,7 @@ def deploy(ctx):
             user="user",
             connect_kwargs={"key_filename": 'key'},
     ) as c:
-        with c.cd("/home/user"):
+        with c.cd("/home/user"):#
             c.run("docker pull damirmin/test_fastapi:latest")
             c.run("docker stop test_fastapi")
             c.run("docker rm test_fastapi")

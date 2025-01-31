@@ -15,9 +15,9 @@ def deploy(ctx):
             connect_kwargs={"key_filename": 'key'},
     ) as c:
         with c.cd("/home/user"):
-            c.run("docker pull damirmin/test_fastapi:3.0.0")
+            c.run("docker pull damirmin/test_fastapi:latest")
             c.run("docker stop test_fastapi")
             c.run("docker rm test_fastapi")
-            c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:3.0.0")
+            c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:latest")
 
     os.remove('key')

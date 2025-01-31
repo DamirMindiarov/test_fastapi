@@ -69,29 +69,29 @@ jobs:
       - name: push image to docker
         run: docker push $LOGIN/$NAME
 
-#  deploy:
-#    needs: [build_and_pub]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: setup python
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: 3.12
-#
-#      - name: install fabric
-#        run: |
-#          pip install fabric==3.2.2
-#          pip install paramiko==3.5.0
-#
-#      - name: deploy
-#        env:
-#          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
-#        run: |
-#          echo $P_SSH_KEY
-#          python fabfile.py
-#          fab deploy
+  deploy:
+    needs: [build_and_pub]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: install fabric
+        run: |
+          pip install fabric==3.2.2
+          pip install paramiko==3.5.0
+
+      - name: deploy
+        env:
+          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
+        run: |
+          echo $P_SSH_KEY
+          python fabfile.py
+          fab deploy
 
 

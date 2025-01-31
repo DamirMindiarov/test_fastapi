@@ -21,10 +21,5 @@ def deploy(ctx):
             c.run("docker compose down")
             c.run("git pull")
             c.run("docker compose up -d")
-            # c.run("docker pull damirmin/test_fastapi:latest")
-            # c.run('docker stop $(docker ps -f name=test_fastapi -qa)')
-            # c.run("docker rm $(docker ps -f name=test_fastapi -qa)")
-            # c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:latest")
-            #
 
     os.remove('key')

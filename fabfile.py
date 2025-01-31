@@ -3,7 +3,6 @@ import os
 from fabric import Connection, task
 
 
-
 @task
 def deploy(ctx):
 

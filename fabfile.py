@@ -17,10 +17,7 @@ def deploy(ctx):
         with c.cd("/home/user"):#
             c.run("docker pull damirmin/test_fastapi:latest")
             c.run('docker ps --filter "name=test_fastapi" | docker stop test_fastapi')
-            try:
-                c.run("docker rm test_fastapi")
-            except:
-                pass
+            c.run("docker rm $(docker ps -f name=test_fastapi -qa)")
             c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:latest")
 
     os.remove('key')

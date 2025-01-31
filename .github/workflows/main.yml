@@ -64,10 +64,10 @@ jobs:
 
       - name: build image
         run: |
-          docker build -t $LOGIN/$NAME:test .
+          docker build -t $LOGIN/$NAME:latest .
 
       - name: push image to docker
-        run: docker push $LOGIN/$NAME:test
+        run: docker push $LOGIN/$NAME:latest
 
   deploy:
     needs: [build_and_pub]

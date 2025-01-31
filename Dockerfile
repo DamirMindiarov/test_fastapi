@@ -8,6 +8,5 @@ COPY /tests /test_fastapi/tests/
 COPY /requirements.txt /test_fastapi/
 
 RUN pip install -r /test_fastapi/requirements.txt
-#ENTRYPOINT ["uvicorn"]
-#
+
 CMD ["uvicorn", "app.routes:app", "--host", "0.0.0.0"]

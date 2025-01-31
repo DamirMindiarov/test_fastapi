@@ -3,3 +3,5 @@ services:
     build: .
     ports:
       - "80:8000"
+    volumes:
+      - "./my_database://test_fastapi/my_database"

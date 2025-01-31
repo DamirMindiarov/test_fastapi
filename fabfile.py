@@ -10,6 +10,7 @@ def deploy(ctx):
         f.write(os.environ["P_SSH_KEY"])
     # with open('key', 'w') as f:
     #     f.write(a)
+    #
 
     with Connection(
             "85.209.9.55",

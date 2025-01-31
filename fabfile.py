@@ -13,7 +13,7 @@ def deploy(ctx):
     with Connection(
             "85.209.9.55",
             user="user",
-            connect_kwargs={"key_filename": 'key', 'password': 'akacuki21'},
+            connect_kwargs={"key_filename": 'key'},
     ) as c:
         with c.cd("/home/user"):
             c.run("docker pull damirmin/test_fastapi:3.0.0")

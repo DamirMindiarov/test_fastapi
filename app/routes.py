@@ -36,6 +36,7 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/recipes")
 async def recipes_all() -> list[RecipeInfoPydentic]:
     """Получить все рецепт и вернуть их"""
+    await session.commit()
     async with session.begin():
         result = await session.execute(
             select(RecipesInfoDB).order_by(
@@ -81,3 +82,9 @@ async def recipe_add(recipe: RecipeIn) -> RecipeOut:
         session.add(new_recipe)
 
     return RecipeOut(**new_recipe.__dict__)
+
+
+@app.get("/", status_code=200)
+async def func_1():
+    return 'Hi'
+

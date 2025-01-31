@@ -1,0 +1,5 @@
+services:
+  test_fastapi:
+    build: .
+    ports:
+      - "80:8000"

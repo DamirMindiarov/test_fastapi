@@ -40,62 +40,58 @@ jobs:
 #        run: |
 #          flake8 app
 #          flake8 tests
-#
-##      - name: mypy
-##        run: |
-##          mypy app
-##          mypy tests
-#
-#  build_and_pub:
-#    needs: [run_tests]
-#    runs-on: ubuntu-latest
-#    env:
-#      LOGIN: ${{ secrets.DOCKER_LOGIN }}
-#      PWD: ${{ secrets.DOCKER_PWD }}
-#      NAME: ${{ secrets.DOCKER_NAME }}
-#
-#
-#    steps:
-#      - name: checkout code
-#        uses: actions/checkout@v2
-#
-#      - name: login to docker
-#        run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
-#
-#      - name: build image
-#        run: |
-#          echo ${GITHUB_REF}
-#          echo ${GITHUB_REF:11}
-#          echo ${GITHUB_REF:5}
-#          echo ${GITHUB_REF:15}
-#          docker build -t $LOGIN/$NAME:3.0.0 .
-#
-#      - name: push image to docker
-#        run: docker push $LOGIN/$NAME:3.0.0
 
-  deploy:
-#    needs: [build_and_pub]
+#      - name: mypy
+#        run: |
+#          mypy app
+#          mypy tests
+
+  build_and_pub:
+#    needs: [run_tests]
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      PWD: ${{ secrets.DOCKER_PWD }}
+      NAME: ${{ secrets.DOCKER_NAME }}
+
+
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v2
 
-      - name: setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.12
+      - name: login to docker
+        run: echo ${{ secrets.DOCKER_PWD }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
 
-      - name: install fabric
+      - name: build image
         run: |
-          pip install fabric==3.2.2
-          pip install paramiko==3.5.0
+          docker build -t $LOGIN/$NAME .
 
-      - name: deploy
-        env:
-          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
-        run: |
-          echo $P_SSH_KEY
-          python fabfile.py
-          fab deploy
+      - name: push image to docker
+        run: docker push $LOGIN/$NAME
+
+#  deploy:
+#    needs: [build_and_pub]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: setup python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: 3.12
+#
+#      - name: install fabric
+#        run: |
+#          pip install fabric==3.2.2
+#          pip install paramiko==3.5.0
+#
+#      - name: deploy
+#        env:
+#          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
+#        run: |
+#          echo $P_SSH_KEY
+#          python fabfile.py
+#          fab deploy
 
 

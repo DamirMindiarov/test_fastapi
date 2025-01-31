@@ -5,10 +5,9 @@ from fabric import Connection, task
 
 @task
 def deploy(ctx):
-    a = os.environ["P_SSH_KEY"]
 
     with open('key', 'w') as f:
-        f.write(a)
+        f.write(os.environ["P_SSH_KEY"])
 
     with Connection(
             "85.209.9.55",
@@ -17,6 +16,8 @@ def deploy(ctx):
     ) as c:
         with c.cd("/home/user"):
             c.run("docker pull damirmin/test_fastapi:3.0.0")
-            c.run("docker run -p 80:8000 -d damirmin/test_fastapi:3.0.0")
+            c.run("docker stop test_fastapi")
+            c.run("docker rm test_fastapi")
+            c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:3.0.0")
 
     os.remove('key')

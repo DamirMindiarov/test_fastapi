@@ -16,8 +16,11 @@ def deploy(ctx):
     ) as c:
         with c.cd("/home/user"):#
             c.run("docker pull damirmin/test_fastapi:latest")
-            c.run("docker stop test_fastapi")
-            c.run("docker rm test_fastapi")
+            c.run('docker ps --filter "name=test_fastapi" | docker stop test_fastapi')
+            try:
+                c.run("docker rm test_fastapi")
+            except:
+                pass
             c.run("docker run --name test_fastapi -p 80:8000 -d damirmin/test_fastapi:latest")
 
     os.remove('key')

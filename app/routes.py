@@ -82,3 +82,9 @@ async def recipe_add(recipe: RecipeIn) -> RecipeOut:
         session.add(new_recipe)
 
     return RecipeOut(**new_recipe.__dict__)
+
+
+@app.get("/", status_code=200)
+async def func_1():
+    return 'Hi'
+

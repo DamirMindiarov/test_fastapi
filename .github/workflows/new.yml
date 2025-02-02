@@ -9,17 +9,17 @@ on:
       - 'main'
 
 jobs:
-  jobs:
-    run_tests:
-      runs-on: ubuntu-latest
+  run_tests:
+    runs-on: ubuntu-latest
 
-      steps:
-        - name: TEST push
-          run: echo 132
+    steps:
+      - name: TEST push
+        run: echo 132
 
   deploy:
     needs: [ run_tests ]
     runs-on: ubuntu-latest
+
     steps:
       - name: Test pull request
         run: echo 456

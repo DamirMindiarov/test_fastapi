@@ -9,9 +9,13 @@ on:
       - '*'
 
 jobs:
-#  run_tests:
-#    runs-on: ubuntu-latest
-#
+  run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: TEST push
+        run: echo 132
+
 #    steps:
 #      - name: Checkout code
 #        uses: actions/checkout@v2
@@ -40,7 +44,7 @@ jobs:
 #        run: |
 #          flake8 app
 #          flake8 tests
-
+#
 #      - name: mypy
 #        run: |
 #          mypy app
@@ -70,28 +74,30 @@ jobs:
 #        run: docker push $LOGIN/$NAME:latest
 
   deploy:
-#    needs: [build_and_pub]
+    needs: [run_tests]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.12
-
-      - name: install fabric
-        run: |
-          pip install fabric==3.2.2
-          pip install paramiko==3.5.0
-
-      - name: deploy
-        env:
-          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
-        run: |
-          echo $P_SSH_KEY
-          python fabfile.py
-          fab deploy
+      - name: Test pull request
+        run: echo 456
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: setup python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: 3.12
+#
+#      - name: install fabric
+#        run: |
+#          pip install fabric==3.2.2
+#          pip install paramiko==3.5.0
+#
+#      - name: deploy
+#        env:
+#          P_SSH_KEY: ${{ secrets.P_SSH_KEY }}
+#        run: |
+#          echo $P_SSH_KEY
+#          python fabfile.py
+#          fab deploy
 
 

@@ -3,7 +3,6 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-# DATABASE_URL = "sqlite+aiosqlite:///./database.db"
 DATABASE_URL = "sqlite+aiosqlite:///my_database/database.db"
 
 engine = create_async_engine(DATABASE_URL, echo=True)

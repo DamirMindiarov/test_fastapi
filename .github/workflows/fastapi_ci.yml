@@ -1,0 +1,48 @@
+name: FastApi CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
+      - name: run test_app.py
+        run: |
+          mkdir my_database
+          pytest
+
+      - name: black
+        run: black --check --diff --line-length 79 .
+
+      - name: isort
+        run: isort --check-only --diff --profile black .
+
+      - name: flake8
+        run: |
+          flake8 app
+          flake8 tests
+
+      - name: mypy
+        run: |
+          mypy app
+          mypy tests
+
+
+  
+
+

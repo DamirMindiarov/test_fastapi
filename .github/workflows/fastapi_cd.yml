@@ -18,9 +18,6 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: print(login)
-        run: echo ${{ secrets.TEST_KEY }}
-
       - name: install dependencies
         run: pip install -r requirements.txt
 
